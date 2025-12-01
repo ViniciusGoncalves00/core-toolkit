@@ -1,44 +1,39 @@
 {
-    "name": "core-toolkit",
-    "version": "0.1.1",
-    "main": "dist/index.cjs",
-    "module": "dist/index.mjs",
-    "types": "dist/index.d.ts",
-    "type": "module",
-    "files": [
-        "dist"
-    ],
-    "scripts": {
-        "build": "tsup",
-        "build:watch": "tsup --watch",
-        "lint": "eslint \"src/**/*.{ts,tsx}\" --fix",
-        "format": "prettier --write \"src/**/*.{ts,tsx,js,json,md}\"",
-        "fix": "npm run format && npm run lint",
-        "clean": "rimraf dist"
-    },
-    "keywords": [
-        "utils",
-        "toolkit",
-        "typescript"
-    ],
-    "author": "Vinicius Gonçalves <viniciusgoncalves2000@hotmail.com>",
-    "license": "MIT",
-    "description": "",
-    "devDependencies": {
-        "@eslint/js": "^9.39.1",
-        "@types/node": "^24.10.1",
-        "@typescript-eslint/eslint-plugin": "^8.48.0",
-        "@typescript-eslint/parser": "^8.48.0",
-        "eslint": "^9.39.1",
-        "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-import": "^2.32.0",
-        "prettier": "^3.7.2",
-        "tsup": "^8.5.1",
-        "typescript": "^5.9.3",
-        "typescript-eslint": "^8.48.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/ViniciusGoncalves00/core-toolkit.git"
+  "name": "core-toolkit",
+  "version": "0.1.1",
+  "type": "module",
+
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     }
+  },
+
+  "files": ["dist"],
+
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,json,md}\"",
+    "fix": "npm run format && npm run lint",
+    "clean": "rimraf dist"
+  },
+
+  "keywords": ["utils", "toolkit", "typescript"],
+  "author": "Vinicius Gonçalves <viniciusgoncalves2000@hotmail.com>",
+  "license": "MIT",
+
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "eslint": "^9.39.1",
+    "prettier": "^3.7.2"
+  }
 }
