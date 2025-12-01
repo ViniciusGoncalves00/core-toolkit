@@ -1,12 +1,10 @@
 {
   "name": "core-toolkit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
-
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -14,9 +12,9 @@
       "types": "./dist/index.d.ts"
     }
   },
-
-  "files": ["dist"],
-
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "build:watch": "tsup --watch",
@@ -25,11 +23,13 @@
     "fix": "npm run format && npm run lint",
     "clean": "rimraf dist"
   },
-
-  "keywords": ["utils", "toolkit", "typescript"],
+  "keywords": [
+    "utils",
+    "toolkit",
+    "typescript"
+  ],
   "author": "Vinicius Gonçalves <viniciusgoncalves2000@hotmail.com>",
   "license": "MIT",
-
   "devDependencies": {
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
