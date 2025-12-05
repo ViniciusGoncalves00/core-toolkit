@@ -1,2 +1,2 @@
-export { Singleton } from './patterns/class/singleton/singleton.js';
+export { Singleton } from './patterns/creational/singleton.js';
 export { Coordinates } from './coordinates/coordinates.js';
