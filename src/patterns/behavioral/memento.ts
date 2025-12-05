@@ -1,6 +1,4 @@
-import { LimitedStack } from '../../datastructures/limitedStack.js';
 import { ShiftableStack } from '../../datastructures/shiftableStack.js';
-import { Stack } from '../../datastructures/stack.js';
 
 export interface IStatable<T> {
 	save(): IState<T>;
@@ -15,11 +13,11 @@ export class StateHistoric<T> {
 	private readonly object: IStatable<T>;
 	private readonly states: ShiftableStack<IState<T>>;
 	private pointer: number;
-	private capacity: number;
+	private _capacity: number;
 
 	public constructor(object: IStatable<T>, capacity: number = 4) {
         this.object = object;
-		this.capacity = capacity;
+		this._capacity = capacity;
         
 		this.states = new ShiftableStack(capacity);
 		this.pointer = -1;
@@ -41,4 +39,8 @@ export class StateHistoric<T> {
 		this.object.restore(state!);
 		this.pointer--;
 	}
+
+    public capacity(): number {
+        return this._capacity;
+    }
 }
