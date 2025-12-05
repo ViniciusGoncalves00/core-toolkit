@@ -36,9 +36,9 @@ export class LimitedStack<T> {
 		return this.items.length === this._capacity;
 	}
 
-    public capacity(): number {
-        return this._capacity;
-    }
+	public capacity(): number {
+		return this._capacity;
+	}
 
 	public clear(): void {
 		this.items.length = 0;
