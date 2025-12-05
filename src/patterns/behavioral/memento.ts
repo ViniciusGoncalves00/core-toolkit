@@ -1,61 +1,44 @@
 import { LimitedStack } from '../../datastructures/limitedStack.js';
+import { ShiftableStack } from '../../datastructures/shiftableStack.js';
 import { Stack } from '../../datastructures/stack.js';
 
-export interface IMementable<T> {
-	save(): IMemento<T>;
-	restore(memento: IMemento<T>): void;
+export interface IStatable<T> {
+	save(): IState<T>;
+	restore(state: IState<T>): void;
 }
 
-export interface IMemento<T> {
+export interface IState<T> {
 	readonly data: T;
 }
 
-export class MementoKeeper<T> {
-	private readonly object: IMementable<T>;
-	private readonly historic: LimitedStack<IMemento<T>> | Stack<IMemento<T>>;
+export class StateHistoric<T> {
+	private readonly object: IStatable<T>;
+	private readonly states: ShiftableStack<IState<T>>;
 	private pointer: number;
+	private capacity: number;
 
-	public constructor(object: IMementable<T>, size?: number) {
-		this.object = object;
-
-		if (size) {
-			this.historic = new LimitedStack(size);
-		} else {
-			this.historic = new Stack();
-		}
-
+	public constructor(object: IStatable<T>, capacity: number = 4) {
+        this.object = object;
+		this.capacity = capacity;
+        
+		this.states = new ShiftableStack(capacity);
 		this.pointer = -1;
 	}
 
 	public save(): void {
-		const memento = this.object.save();
-
-		if (this.historic instanceof LimitedStack) {
-			if (this.historic.isFull()) return;
-		}
-
-		this.historic.push(memento);
+		const state = this.object.save();
+		this.states.push(state);
 		this.pointer++;
 	}
 
 	public restore(): void {
-        if (this.pointer === -1) {
+		if (this.pointer === -1) {
 			console.warn('There are nothing to restore.');
 			return;
 		}
-        
-		const memento = this.historic.pop();
-		this.object.restore(memento!);
+
+		const state = this.states.pop();
+		this.object.restore(state!);
 		this.pointer--;
 	}
-
-    public stackType(): typeof LimitedStack | typeof Stack {
-        if (this.historic instanceof LimitedStack) {
-			return LimitedStack;
-		} else if (this.historic instanceof Stack) {
-            return Stack;
-        } else {
-            throw new Error("Was not possible to determine the stack type.");
-        }
-    }
 }
